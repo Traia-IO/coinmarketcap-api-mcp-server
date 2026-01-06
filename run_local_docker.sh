@@ -38,7 +38,7 @@ STAGE=MAINNET
 LOG_LEVEL=INFO
 
 # API Authentication (server's internal key for payment mode)
-COINMARKETCAP_API_KEY=
+COINMARKETCAP_API_API_KEY=
 # D402 Payment Protocol Configuration
 SERVER_ADDRESS=
 MCP_OPERATOR_PRIVATE_KEY=
@@ -197,31 +197,31 @@ else
 fi
 
 # Step 5: Prompt for API key if required (only if not already set)
-if ! grep -q "^COINMARKETCAP_API_KEY=[^[:space:]]" .env; then
+if ! grep -q "^COINMARKETCAP_API_API_KEY=[^[:space:]]" .env; then
     if [ -t 0 ]; then
         echo ""
         echo -e "${YELLOW}📝 Please enter your CoinMarketCap API API key:${NC}"
         echo -e "${YELLOW}   (This is the server's internal API key used when clients pay via 402)${NC}"
-        read -p "COINMARKETCAP_API_KEY: " API_KEY_VALUE
+        read -p "COINMARKETCAP_API_API_KEY: " API_KEY_VALUE
         if [ -n "$API_KEY_VALUE" ]; then
-            if grep -q "^COINMARKETCAP_API_KEY=" .env; then
+            if grep -q "^COINMARKETCAP_API_API_KEY=" .env; then
                 if [[ "$OSTYPE" == "darwin"* ]]; then
-                    sed -i '' "s|^COINMARKETCAP_API_KEY=.*|COINMARKETCAP_API_KEY=$API_KEY_VALUE|" .env
+                    sed -i '' "s|^COINMARKETCAP_API_API_KEY=.*|COINMARKETCAP_API_API_KEY=$API_KEY_VALUE|" .env
                 else
-                    sed -i "s|^COINMARKETCAP_API_KEY=.*|COINMARKETCAP_API_KEY=$API_KEY_VALUE|" .env
+                    sed -i "s|^COINMARKETCAP_API_API_KEY=.*|COINMARKETCAP_API_API_KEY=$API_KEY_VALUE|" .env
                 fi
             else
-                echo "COINMARKETCAP_API_KEY=$API_KEY_VALUE" >> .env
+                echo "COINMARKETCAP_API_API_KEY=$API_KEY_VALUE" >> .env
             fi
             echo -e "${GREEN}✅ API key saved to .env${NC}"
         else
             echo -e "${YELLOW}⚠️  No API key provided. You can set it later in .env${NC}"
         fi
     else
-        echo -e "${YELLOW}⚠️  Non-interactive mode: Please set COINMARKETCAP_API_KEY in .env manually${NC}"
+        echo -e "${YELLOW}⚠️  Non-interactive mode: Please set COINMARKETCAP_API_API_KEY in .env manually${NC}"
     fi
 else
-    echo -e "${GREEN}✅ COINMARKETCAP_API_KEY already set in .env${NC}"
+    echo -e "${GREEN}✅ COINMARKETCAP_API_API_KEY already set in .env${NC}"
 fi
 
 echo ""
