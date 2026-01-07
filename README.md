@@ -37,7 +37,7 @@ This server provides the following tools:
 
 2. Set your API key:
    ```bash
-   export COINMARKETCAP_API_API_KEY="your-api-key-here"
+   export COINMARKETCAP_API_KEY="your-api-key-here"
    ```
 
 3. Run with Docker:
@@ -50,7 +50,7 @@ This server provides the following tools:
 1. Create a `.env` file with your configuration:
    ```env
 # Server's internal API key (for payment mode)
-   COINMARKETCAP_API_API_KEY=your-api-key-here
+   COINMARKETCAP_API_KEY=your-api-key-here
    
    # Server payment address (for HTTP 402 protocol)
    SERVER_ADDRESS=0x1234567890123456789012345678901234567890
@@ -78,7 +78,7 @@ PORT=8000
 
 2. Run the server:
    ```bash
-COINMARKETCAP_API_API_KEY="your-api-key-here" uv run python -m server
+COINMARKETCAP_API_KEY="your-api-key-here" uv run python -m server
    ```
 
 ## Usage
@@ -120,7 +120,7 @@ Clients with their own CoinMarketCap API API key can use the server for free:
 ```bash
 # Request with client's API key
 curl -X POST http://localhost:8000/mcp \
-  -H "Authorization: Bearer CLIENT_COINMARKETCAP_API_API_KEY" \
+  -H "Authorization: Bearer CLIENT_COINMARKETCAP_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{"method":"tools/call","params":{"name":"example_tool","arguments":{"query":"test"}}}'
 ```
@@ -166,7 +166,7 @@ This server uses the **traia_iatp.d402** module for payment verification:
 
 ```bash
 # Required
-COINMARKETCAP_API_API_KEY=your_internal_coinmarketcap-api_api_key  # Server's API key (for payment mode)
+COINMARKETCAP_API_KEY=your_internal_coinmarketcap-api_api_key  # Server's API key (for payment mode)
 SERVER_ADDRESS=0x1234567890123456789012345678901234567890  # Server's payment address
 
 # Required for Settlement (Production)
@@ -264,7 +264,7 @@ This server is designed to be deployed on Google Cloud Run. The deployment will:
 - `PORT`: Server port (default: 8000)
 - `STAGE`: Environment stage (default: MAINNET, options: MAINNET, TESTNET)
 - `LOG_LEVEL`: Logging level (default: INFO)
-- `COINMARKETCAP_API_API_KEY`: Your CoinMarketCap API API key (required)
+- `COINMARKETCAP_API_KEY`: Your CoinMarketCap API API key (required)
 ## Troubleshooting
 
 1. **Server not starting**: Check Docker logs with `docker logs <container-id>`

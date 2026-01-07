@@ -7,7 +7,7 @@ You are working on implementing the CoinMarketCap API MCP (Model Context Protoco
 - **API Name**: CoinMarketCap API
 - **Documentation**: [https://coinmarketcap.com/api/documentation/v1/](https://coinmarketcap.com/api/documentation/v1/)
 - **Website**: [https://pro-api.coinmarketcap.com](https://pro-api.coinmarketcap.com)
-- **Authentication**: Required - API key via `COINMARKETCAP_API_API_KEY` environment variable
+- **Authentication**: Required - API key via `COINMARKETCAP_API_KEY` environment variable
 ## 🔒 HTTP 402 Payment Protocol - Dual-Mode Operation
 
 This MCP server implements the **HTTP 402 Payment Required** protocol using the **traia_iatp.d402** module with dual-mode support:
@@ -120,7 +120,7 @@ async def your_tool_name(context: Context, param1: str) -> Dict[str, Any]:
         api_key_to_use = api_key
     else:
         # MODE 2: Use server's internal API key (client paid)
-        api_key_to_use = os.getenv("COINMARKETCAP_API_API_KEY")
+        api_key_to_use = os.getenv("COINMARKETCAP_API_KEY")
     
     # Call API
     headers = {"Authorization": f"Bearer {api_key_to_use}"}
@@ -157,7 +157,7 @@ Therefore:
 ### Environment Variables
 
 **Required**:
-- `COINMARKETCAP_API_API_KEY`: Server's internal CoinMarketCap API API key (used when clients pay via 402)
+- `COINMARKETCAP_API_KEY`: Server's internal CoinMarketCap API API key (used when clients pay via 402)
 - `SERVER_ADDRESS`: MCP server's payment address (where 402 payments are sent)
 
 **Required for Settlement (Production)**:
@@ -172,7 +172,7 @@ Therefore:
 **Example .env file**:
 ```bash
 # API Authentication (server's internal key for payment mode)
-COINMARKETCAP_API_API_KEY=your_coinmarketcap-api_api_key_here
+COINMARKETCAP_API_KEY=your_coinmarketcap-api_api_key_here
 
 # Server Payment Address (where 402 payments are received)
 SERVER_ADDRESS=0x1234567890123456789012345678901234567890
