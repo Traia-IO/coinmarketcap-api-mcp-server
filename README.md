@@ -1,11 +1,11 @@
-# CoinMarketCap API MCP Server
+# Coinmarketcap API MCP Server
 
-This is an MCP (Model Context Protocol) server that provides with authentication via Bearer tokens access to the CoinMarketCap API API. It enables AI agents and LLMs to interact with CoinMarketCap API through standardized tools.
+This is an MCP (Model Context Protocol) server that provides with authentication via Bearer tokens access to the Coinmarketcap API API. It enables AI agents and LLMs to interact with Coinmarketcap API through standardized tools.
 
 ## Features
 
 - 🔧 **MCP Protocol**: Built on the Model Context Protocol for seamless AI integration
-- 🌐 **Full API Access**: Provides tools for interacting with CoinMarketCap API endpoints
+- 🌐 **Full API Access**: Provides tools for interacting with Coinmarketcap API endpoints
 - 🔐 **Secure Authentication**: Supports API key authentication via Bearer tokens
 - 💳 **HTTP 402 Payment Protocol**: Dual-mode operation (authenticated or paid access)
 - 🔗 **D402 Integration**: Uses traia_iatp.d402 for blockchain payment verification
@@ -14,7 +14,7 @@ This is an MCP (Model Context Protocol) server that provides with authentication
 
 ## API Documentation
 
-- **CoinMarketCap API Website**: [https://pro-api.coinmarketcap.com](https://pro-api.coinmarketcap.com)
+- **Coinmarketcap API Website**: [https://pro-api.coinmarketcap.com/](https://pro-api.coinmarketcap.com/)
 - **API Documentation**: [https://coinmarketcap.com/api/documentation/v1/](https://coinmarketcap.com/api/documentation/v1/)
 
 ## Available Tools
@@ -23,7 +23,7 @@ This server provides the following tools:
 
 - **`example_tool`**: Placeholder tool (to be implemented)
 
-*Note: Replace `example_tool` with actual CoinMarketCap API API tools based on the documentation.*
+*Note: Replace `example_tool` with actual Coinmarketcap API API tools based on the documentation.*
 
 ## Installation
 
@@ -115,7 +115,7 @@ This server supports **two modes of operation**:
 
 ### Mode 1: Authenticated Access (Free)
 
-Clients with their own CoinMarketCap API API key can use the server for free:
+Clients with their own Coinmarketcap API API key can use the server for free:
 
 ```bash
 # Request with client's API key
@@ -126,10 +126,10 @@ curl -X POST http://localhost:8000/mcp \
 ```
 
 **Flow**:
-1. Client provides their CoinMarketCap API API key
-2. Server uses client's API key to call CoinMarketCap API API
+1. Client provides their Coinmarketcap API API key
+2. Server uses client's API key to call Coinmarketcap API API
 3. No payment required
-4. Client pays CoinMarketCap API directly
+4. Client pays Coinmarketcap API directly
 
 ### Mode 2: Payment Required (Paid Access)
 
@@ -149,7 +149,7 @@ curl -X POST http://localhost:8000/mcp \
 3. Client creates EIP-3009 transferWithAuthorization payment signature
 4. Client base64-encodes payment and sends in X-PAYMENT header
 5. Server verifies payment via traia_iatp.d402.mcp_middleware
-6. Server uses its INTERNAL CoinMarketCap API API key to call the API
+6. Server uses its INTERNAL Coinmarketcap API API key to call the API
 7. Client receives result
 
 ### D402 Protocol Details
@@ -192,7 +192,7 @@ They come from the endpoint configuration when the server is generated.
 ### How It Works
 
 1. **Client Decision**:
-   - Has CoinMarketCap API API key? → Mode 1 (Authenticated)
+   - Has Coinmarketcap API API key? → Mode 1 (Authenticated)
    - No API key but willing to pay? → Mode 2 (Payment)
 
 2. **Server Response**:
@@ -216,7 +216,7 @@ They come from the endpoint configuration when the server is generated.
 
 To add new tools, edit `server.py` and:
 
-1. Create API client functions for CoinMarketCap API endpoints
+1. Create API client functions for Coinmarketcap API endpoints
 2. Add `@mcp.tool()` decorated functions
 3. Update this README with the new tools
 4. Update `deployment_params.json` with the tool names in the capabilities array
@@ -232,7 +232,7 @@ The `deployment_params.json` file contains the deployment configuration for this
   "github_url": "https://github.com/Traia-IO/coinmarketcap-api-mcp-server",
   "mcp_server": {
     "name": "coinmarketcap-api-mcp",
-    "description": "Coinmarketcap cryptocurrency market data api - comprehensive price, market cap, volume, and market metrics",
+    "description": "Coinmarketcap cryptocurrency data api",
     "server_type": "streamable-http",
 "requires_api_key": true,
     "api_key_header": "Authorization",
@@ -264,7 +264,7 @@ This server is designed to be deployed on Google Cloud Run. The deployment will:
 - `PORT`: Server port (default: 8000)
 - `STAGE`: Environment stage (default: MAINNET, options: MAINNET, TESTNET)
 - `LOG_LEVEL`: Logging level (default: INFO)
-- `COINMARKETCAP_API_KEY`: Your CoinMarketCap API API key (required)
+- `COINMARKETCAP_API_KEY`: Your Coinmarketcap API API key (required)
 ## Troubleshooting
 
 1. **Server not starting**: Check Docker logs with `docker logs <container-id>`

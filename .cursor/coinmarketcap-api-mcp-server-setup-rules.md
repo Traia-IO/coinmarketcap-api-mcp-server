@@ -1,12 +1,12 @@
-# CoinMarketCap API MCP Server Implementation Guide
+# Coinmarketcap API MCP Server Implementation Guide
 
-You are working on implementing the CoinMarketCap API MCP (Model Context Protocol) server. The basic structure has been set up, and your task is to implement the actual API integration.
+You are working on implementing the Coinmarketcap API MCP (Model Context Protocol) server. The basic structure has been set up, and your task is to implement the actual API integration.
 
 ## API Information
 
-- **API Name**: CoinMarketCap API
+- **API Name**: Coinmarketcap API
 - **Documentation**: [https://coinmarketcap.com/api/documentation/v1/](https://coinmarketcap.com/api/documentation/v1/)
-- **Website**: [https://pro-api.coinmarketcap.com](https://pro-api.coinmarketcap.com)
+- **Website**: [https://pro-api.coinmarketcap.com/](https://pro-api.coinmarketcap.com/)
 - **Authentication**: Required - API key via `COINMARKETCAP_API_KEY` environment variable
 ## 🔒 HTTP 402 Payment Protocol - Dual-Mode Operation
 
@@ -14,20 +14,20 @@ This MCP server implements the **HTTP 402 Payment Required** protocol using the 
 
 ### Mode 1: Authenticated (Free Access)
 
-When a client provides their own CoinMarketCap API API key:
+When a client provides their own Coinmarketcap API API key:
 
 ```
 Request Headers:
   Authorization: Bearer CLIENT_API_KEY
 
 Flow:
-  1. Client connects with their CoinMarketCap API API key
-  2. MCP server uses client's API key to call CoinMarketCap API API
+  1. Client connects with their Coinmarketcap API API key
+  2. MCP server uses client's API key to call Coinmarketcap API API
   3. No payment required
-  4. Client pays CoinMarketCap API directly (not the MCP server)
+  4. Client pays Coinmarketcap API directly (not the MCP server)
 ```
 
-**Use Case**: Clients who already have a CoinMarketCap API subscription/API key
+**Use Case**: Clients who already have a Coinmarketcap API subscription/API key
 
 ### Mode 2: Payment Required (Paid Access)
 
@@ -59,11 +59,11 @@ Flow:
   1. Client creates EIP-3009 transferWithAuthorization signature
   2. Client sends Payment header with encoded payment payload
   3. MCP server verifies payment using traia_iatp.d402.facilitator
-  4. MCP server uses its INTERNAL CoinMarketCap API API key to call the API
-  5. Client pays the MCP server (not CoinMarketCap API)
+  4. MCP server uses its INTERNAL Coinmarketcap API API key to call the API
+  5. Client pays the MCP server (not Coinmarketcap API)
 ```
 
-**Use Case**: Pay-per-use clients without their own CoinMarketCap API subscription
+**Use Case**: Pay-per-use clients without their own Coinmarketcap API subscription
 
 ### D402 Protocol Integration
 
@@ -124,7 +124,7 @@ async def your_tool_name(context: Context, param1: str) -> Dict[str, Any]:
     
     # Call API
     headers = {"Authorization": f"Bearer {api_key_to_use}"}
-    response = requests.get("https://pro-api.coinmarketcap.com/endpoint", headers=headers)
+    response = requests.get("https://pro-api.coinmarketcap.com//endpoint", headers=headers)
     return response.json()
 ```
 
@@ -157,7 +157,7 @@ Therefore:
 ### Environment Variables
 
 **Required**:
-- `COINMARKETCAP_API_KEY`: Server's internal CoinMarketCap API API key (used when clients pay via 402)
+- `COINMARKETCAP_API_KEY`: Server's internal Coinmarketcap API API key (used when clients pay via 402)
 - `SERVER_ADDRESS`: MCP server's payment address (where 402 payments are sent)
 
 **Required for Settlement (Production)**:
@@ -231,7 +231,7 @@ First, thoroughly review the API documentation at https://coinmarketcap.com/api/
 
 ### 3. Implement API Client Functions
 
-Add functions to call the CoinMarketCap API API with retry support. Example pattern:
+Add functions to call the Coinmarketcap API API with retry support. Example pattern:
 
 ```python
 from retry import retry
@@ -239,7 +239,7 @@ from retry import retry
 # Using requests library with retry decorator
 @retry(tries=2, delay=1, backoff=2, jitter=(1, 3))
 def call_coinmarketcap_api_api(endpoint: str, params: Dict[str, Any], api_key: str) -> Dict[str, Any]:
-    """Call CoinMarketCap API API endpoint with automatic retry."""
+    """Call Coinmarketcap API API endpoint with automatic retry."""
     base_url = "https://api.example.com/v1"  # TODO: Get actual base URL from docs
     
     headers = {
@@ -256,7 +256,7 @@ def call_coinmarketcap_api_api(endpoint: str, params: Dict[str, Any], api_key: s
         response.raise_for_status()
         return response.json()
     except requests.RequestException as e:
-        raise Exception(f"CoinMarketCap API API error: {str(e)}")
+        raise Exception(f"Coinmarketcap API API error: {str(e)}")
 ```
 
 #### Retry Configuration Explained
@@ -279,7 +279,7 @@ async def search_coinmarketcap_api(
     limit: int = 10
 ) -> Dict[str, Any]:
     """
-    Search CoinMarketCap API for [specific data type].
+    Search Coinmarketcap API for [specific data type].
     
     Args:
         context: MCP context (injected automatically)
@@ -336,7 +336,7 @@ async def create_coinmarketcap_api_item(
     data: Dict[str, Any]
 ) -> Dict[str, Any]:
     """
-    Create a new item in CoinMarketCap API.
+    Create a new item in Coinmarketcap API.
     
     Args:
         context: MCP context (injected automatically)
@@ -463,17 +463,17 @@ Before marking the implementation as complete:
 - [ ] Health check passes
 - [ ] At least one tool works end-to-end
 
-### 9. Common CoinMarketCap API Use Cases
+### 9. Common Coinmarketcap API Use Cases
 
 Based on the API documentation, consider implementing tools for these common use cases:
 
-1. **TODO**: List specific use cases based on CoinMarketCap API capabilities
+1. **TODO**: List specific use cases based on Coinmarketcap API capabilities
 2. **TODO**: Add more relevant use cases
 3. **TODO**: Include any special features of this API
 
 ### 10. Example API Calls
 
-Here are some example API calls from the CoinMarketCap API documentation that you should implement:
+Here are some example API calls from the Coinmarketcap API documentation that you should implement:
 
 ```
 TODO: Add specific examples from the API docs
@@ -481,8 +481,8 @@ TODO: Add specific examples from the API docs
 
 ## Need Help?
 
-- Check the CoinMarketCap API API documentation: https://coinmarketcap.com/api/documentation/v1/
+- Check the Coinmarketcap API API documentation: https://coinmarketcap.com/api/documentation/v1/
 - Review the MCP specification: https://modelcontextprotocol.io
 - Look at other MCP server examples in the Traia-IO organization
 
-Remember: The goal is to make CoinMarketCap API's capabilities easily accessible to AI agents through standardized MCP tools. 
+Remember: The goal is to make Coinmarketcap API's capabilities easily accessible to AI agents through standardized MCP tools. 

@@ -71,5 +71,5 @@ output_tests/
 *.temp
 *.bak
 
-# CoinMarketCap API specific
+# Coinmarketcap API specific
  

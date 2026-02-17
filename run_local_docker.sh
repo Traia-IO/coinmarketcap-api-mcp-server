@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Script to build and run the CoinMarketCap API MCP Server locally in Docker
+# Script to build and run the Coinmarketcap API MCP Server locally in Docker
 
 set -e  # Exit on error
 
@@ -17,7 +17,7 @@ CONTAINER_NAME="coinmarketcap-api-mcp-local"
 HOST_PORT=${PORT:-8000}
 CONTAINER_PORT=${PORT:-8000}
 
-echo -e "${BLUE}🚀 Building and running CoinMarketCap API MCP Server...${NC}"
+echo -e "${BLUE}🚀 Building and running Coinmarketcap API MCP Server...${NC}"
 echo
 
 # Setup .env file for local development
@@ -32,7 +32,7 @@ if [ ! -f .env ]; then
         echo -e "${YELLOW}⚠️  .env.example not found, creating minimal .env template...${NC}"
         # Create minimal .env template
         cat > .env << EOF
-# CoinMarketCap API MCP Server Configuration
+# Coinmarketcap API MCP Server Configuration
 PORT=8000
 STAGE=MAINNET
 LOG_LEVEL=INFO
@@ -200,7 +200,7 @@ fi
 if ! grep -q "^COINMARKETCAP_API_KEY=[^[:space:]]" .env; then
     if [ -t 0 ]; then
         echo ""
-        echo -e "${YELLOW}📝 Please enter your CoinMarketCap API API key:${NC}"
+        echo -e "${YELLOW}📝 Please enter your Coinmarketcap API API key:${NC}"
         echo -e "${YELLOW}   (This is the server's internal API key used when clients pay via 402)${NC}"
         read -p "COINMARKETCAP_API_KEY: " API_KEY_VALUE
         if [ -n "$API_KEY_VALUE" ]; then
@@ -362,7 +362,7 @@ CONTAINER_IP=$(docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress
 
 # Output connection information
 echo
-echo -e "${GREEN}✅ CoinMarketCap API MCP Server is running!${NC}"
+echo -e "${GREEN}✅ Coinmarketcap API MCP Server is running!${NC}"
 echo
 echo -e "${BLUE}📍 Connection Information:${NC}"
 echo -e "   Local URL:        ${GREEN}http://localhost:${HOST_PORT}/mcp${NC}"

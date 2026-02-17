@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 """
-CoinMarketCap API MCP Server Health Check Script
+Coinmarketcap API MCP Server Health Check Script
 
-This script properly connects to the CoinMarketCap API MCP server and checks its health by:
+This script properly connects to the Coinmarketcap API MCP server and checks its health by:
 1. Establishing a session
 2. Requesting server info
 3. Listing available tools
@@ -57,8 +57,8 @@ def send_mcp_request(session: Dict[str, Any], method: str, params: Dict = None) 
         return {"error": str(e)}
 
 def check_mcp_server_health(url: str) -> bool:
-    """Check if CoinMarketCap API MCP server is healthy"""
-    print(f"🔍 Checking CoinMarketCap API MCP server health at {url}")
+    """Check if Coinmarketcap API MCP server is healthy"""
+    print(f"🔍 Checking Coinmarketcap API MCP server health at {url}")
     
     # Create session
     session = create_mcp_session(url)
@@ -97,7 +97,7 @@ def check_mcp_server_health(url: str) -> bool:
             if missing_tools:
                 print(f"⚠️  Missing expected tools: {', '.join(missing_tools)}")
             else:
-                print("✅ All expected CoinMarketCap API tools are available!")
+                print("✅ All expected Coinmarketcap API tools are available!")
     
     # Alternative: Try connecting with CrewAI adapter
     print("\n3️⃣ Testing CrewAI adapter connection...")
@@ -129,21 +129,21 @@ def check_mcp_server_health(url: str) -> bool:
     return True
 
 def main():
-    parser = argparse.ArgumentParser(description="Check CoinMarketCap API MCP Server Health")
+    parser = argparse.ArgumentParser(description="Check Coinmarketcap API MCP Server Health")
     parser.add_argument("--url", default="http://localhost:8000", 
-                       help="CoinMarketCap API MCP server URL (default: http://localhost:8000)")
+                       help="Coinmarketcap API MCP server URL (default: http://localhost:8000)")
     args = parser.parse_args()
     
-    print(f"🚀 CoinMarketCap API MCP Server Health Check")
+    print(f"🚀 Coinmarketcap API MCP Server Health Check")
     print(f"📍 Server URL: {args.url}")
     print(f"📰 Expected tools: example_tool")
     print("="*50)
     
     if check_mcp_server_health(args.url):
-        print("\n✅ CoinMarketCap API MCP Server is healthy and responding!")
+        print("\n✅ Coinmarketcap API MCP Server is healthy and responding!")
         return 0
     else:
-        print("\n❌ CoinMarketCap API MCP Server health check failed!")
+        print("\n❌ Coinmarketcap API MCP Server health check failed!")
         return 1
 
 if __name__ == "__main__":
